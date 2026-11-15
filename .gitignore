@@ -3,6 +3,19 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+
+# Visual Studio
+.vs/
+**/.vs/
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
