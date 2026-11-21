@@ -8,74 +8,60 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 <body>
-    <header class="site-header">
-        <div class="container nav-row">
-            <a class="brand" href="{{ route('home') }}">Bếp Nhà</a>
-            <a href="#cong-thuc">Công thức</a>
-        </div>
-    </header>
-
+   @include('partials.header')
     <main>
         <section class="container hero">
             <p class="eyebrow">GÓC BẾP CỘNG ĐỒNG</p>
             <h1>Khám phá món ngon mỗi ngày</h1>
 
-            <form class="filter-form" action="{{ route('home') }}" method="GET">
-                <label>
-                    Tên món
-                    <input
-                        type="search"
-                        name="q"
-                        value="{{ $filters['q'] ?? '' }}"
-                        placeholder="Tìm kiếm..."
-                    >
-                </label>
+            <form id="bo-loc" class="filter-form" action="{{ route('home') }}" method="GET">
+    <input type="hidden" name="q" value="{{ $filters['q'] ?? '' }}">
 
-                <label>
-                    Danh mục
-                    <select name="category">
-                        <option value="">Tất cả danh mục</option>
-                        @forelse ($categories as $category)
-                            <option
-                                value="{{ $category->MADANHMUC }}"
-                                @selected(($filters['category'] ?? '') == $category->MADANHMUC)
-                            >
-                                {{ $category->TENDANHMUC }}
-                            </option>
-                        @empty
-                            <option value="" disabled>Chưa có danh mục</option>
-                        @endforelse
-                    </select>
-                </label>
+    <label>
+        Danh mục
+        <select name="category">
+            <option value="">Tất cả danh mục</option>
+            @forelse ($categories as $category)
+                <option
+                    value="{{ $category->MADANHMUC }}"
+                    @selected(($filters['category'] ?? '') == $category->MADANHMUC)
+                >
+                    {{ $category->TENDANHMUC }}
+                </option>
+            @empty
+                <option value="" disabled>Chưa có danh mục</option>
+            @endforelse
+        </select>
+    </label>
 
-                <label>
-                    Thời gian tối đa
-                    <input
-                        type="number"
-                        name="max_time"
-                        min="1"
-                        value="{{ $filters['max_time'] ?? '' }}"
-                        placeholder="Ví dụ: 30"
-                    >
-                </label>
+    <label>
+        Thời gian tối đa
+        <input
+            type="number"
+            name="max_time"
+            min="1"
+            value="{{ $filters['max_time'] ?? '' }}"
+            placeholder="Ví dụ: 30"
+        >
+    </label>
 
-                <label>
-                Độ khó
-                <select name="difficulty">
+    <label>
+        Độ khó
+        <select name="difficulty">
+            <option value="">Tất cả độ khó</option>
+            <option value="Dễ" @selected(($filters['difficulty'] ?? '') === 'Dễ')>Dễ</option>
+            <option value="Trung bình" @selected(($filters['difficulty'] ?? '') === 'Trung bình')>Trung bình</option>
+            <option value="Khó" @selected(($filters['difficulty'] ?? '') === 'Khó')>Khó</option>
+        </select>
+    </label>
 
-                    <option value="Dễ" @selected(($filters['difficulty'] ?? '') === 'Dễ')>Dễ</option>
-                    <option value="Trung bình" @selected(($filters['difficulty'] ?? '') === 'Trung bình')>Trung bình</option>
-                    <option value="Khó" @selected(($filters['difficulty'] ?? '') === 'Khó')>Khó</option>
-                </select>
-                </label>
-
-                <button type="submit">Lọc công thức</button>
-                <a href="{{ route('home') }}">Xóa bộ lọc</a>
-            </form>
+    <button type="submit">Lọc công thức</button>
+    <a href="{{ route('home') }}">Xóa bộ lọc</a>
+</form>
         </section>
 
         <section class="container recipe-section" id="cong-thuc">
-            <h2>Công thức đã được duyệt</h2>
+            <h2>Gợi ý hôm nay</h2>
 
             <div class="recipe-grid">
                 @forelse ($recipes as $recipe)

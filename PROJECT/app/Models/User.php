@@ -19,7 +19,7 @@ class User extends Authenticatable
     protected $table = 'NGUOIDUNG';
     protected $primaryKey = 'MANGUOIDUNG';
     public const CREATED_AT = 'NGAYTAO';
-    public const UPDATED_AT = 'NGAYCAPNHAP';
+    public const UPDATED_AT = 'NGAYCAPNHAT';
 
     public function getAuthPasswordName(): string
     {
